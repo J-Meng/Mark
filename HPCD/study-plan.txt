@@ -18,3 +18,5 @@ services interact with storage-service. I'll read/understand the code where stor
     3. Queue jobs.  3 days.
     4. NoSql.  3-4 days.
     5. View the code again or maybe take some practices such as do a feature refer to Group 1 did or anything else?...  5 days.
+
+--
