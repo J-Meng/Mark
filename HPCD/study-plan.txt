@@ -1,0 +1,20 @@
+﻿    As last two week's training, I have a broadly understanding about our drive project. But still need more deeply study for taking the job smooth.
+
+First we have 8 web services in the drive project. So first step, I'll make clear of the jobs by all the services do, and what is important that how do these
+
+services interact with storage-service. I'll read/understand the code where storage-service interact to other services.
+
+    Second step, as we use Mock for the unit-test. I'll learn about Mock to write test case and have a quick look at Nose of python. try more practices.
+
+    Third one, Understand how does queue works in the HPCS. Like task queue by celery or message queue by RabbitMQ.
+
+    The fourth step,  with the NoSQL in system. Including using Cassandra, ElasticSearch.
+
+    Then look through the storage code again maybe this time can have a lot gains.
+
+    --------time line--------
+    1. Figure out the interactions between storage-service and other services.   Maybe 5 days.  
+    2. Unit-Test.   3 days.
+    3. Queue jobs.  3 days.
+    4. NoSql.  3-4 days.
+    5. View the code again or maybe take some practices such as do a feature refer to Group 1 did or anything else?...  5 days.
