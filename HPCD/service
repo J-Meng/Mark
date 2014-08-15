@@ -1,11 +1,11 @@
 We have 7 services in HP Connected Drive Web Services
-1. Directory Service
-2. Metadata Service
-3. Storage Service
-4. Subsciption Service
-5. Crawler Service
-6. Action Service
-7. Push Service
+1. Directory Service   -- polaris-directory
+2. Metadata Service   -- longisland
+3. Storage Service   -- polaris-storage
+4. Subsciption Service   -- also in polaris-directory
+5. Crawler Service   -- crawler
+6. Action Service   -- margarita
+7. Push Service   -- push-service
 
 --------------------------------------
 Directory-Service
@@ -56,6 +56,14 @@ Directory-Service
 	clear_metadata..
 	clear_thumbnails..
 --End of directory-service
+-------------------------------
+
+Metadata Service
+
+What's matadata?.(not a part of object itself but it's an object for examples include the path of an object or the last modification time.)
+
+
+
 
 
 
