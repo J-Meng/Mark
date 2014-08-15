@@ -32,7 +32,7 @@ Directory-Service
 #get_subscription_status
  Route for('/subscription/<userid>/status'). Which return a dict include plan information
 
---#src.directory/login.py
+--#src/directory/login.py
 #login
  Route for('/login'), redirect to the app.config[SNAPFISH]['authorization_url']
 
@@ -44,6 +44,18 @@ Directory-Service
  Get refresh_token from swp
  Return access_token and refresh_token
 
+--#src/directoty/usermgmt
+ #user_service
+ Judeg if config has delete_enabled or clear_enable. Then return the json.
+
+ Some user operation such as:
+	remove_alias.. 
+	delete_user.. 
+	clear_user..
+	clear_filestorage-- use celery(julep.jobs.clear_storage)
+	clear_metadata..
+	clear_thumbnails..
+--End of directory-service
 
 
 
