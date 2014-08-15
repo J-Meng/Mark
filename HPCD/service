@@ -6,3 +6,29 @@ We have 7 services in HP Connected Drive Web Services
 5. Crawler Service
 6. Action Service
 7. Push Service
+
+--------------------------------------
+Directory-Service
+#It is used to get user account information.
+
+#src/directory/user_info.py
+#user_info
+ First get UserLimits, then create "my_map" obj for response.
+
+#add_free_plan_for_user
+ If user has no plan, which means user_subscription_cf has no record, insert one free record into the user_subscription_cf for the user.
+
+(look the subscription plan as the sku)
+
+
+#get_user_active_sku
+ First, take a short of the cql sentence: "select sku_id, expiration from user_subscription_cf where user id = '%s' order by expiration desc;"
+ It will get sku_id sort by expiration desc. So the free plan will be the first result.
+ Then it judge if results count == 1, use the free plan/sku_id, else if count of results > 2 records, use the second record.(skip the first free plan)
+
+#get_subscription_plan
+ Just get sku/plan's state and plan name through sku_id
+
+#get_subscription_status
+ Route for('/subscription/<userid>/status'). Which return a dict include plan information
+
