@@ -11,7 +11,7 @@ We have 7 services in HP Connected Drive Web Services
 Directory-Service
 #It is used to get user account information.
 
-#src/directory/user_info.py
+--#src/directory/user_info.py
 #user_info
  First get UserLimits, then create "my_map" obj for response.
 
@@ -31,4 +31,20 @@ Directory-Service
 
 #get_subscription_status
  Route for('/subscription/<userid>/status'). Which return a dict include plan information
+
+--#src.directory/login.py
+#login
+ Route for('/login'), redirect to the app.config[SNAPFISH]['authorization_url']
+
+#logout...validate....callback_function
+
+#token
+ Check..request..
+ Then Check authorization if not 'bearer'
+ Get refresh_token from swp
+ Return access_token and refresh_token
+
+
+
+
 
