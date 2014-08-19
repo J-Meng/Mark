@@ -90,4 +90,14 @@ Subscription Service
   --GET /subsctiptiton/<user_id>/status-- polaris-directory/src/directory/user_info.py  : Details for user's subscription plan.
   --POST /polaris/services/subscription/callback-- directory/subsctiption_callback.py  : Allows the Microsite to update the Subscription Service with a subscription plan change for a user. Not callable by the clients.
 
-  callback : See the Class Schema
+  subscription_callback : See the Class Schema how to validate the schema.
+  First validate the schema if there has no error.
+      #1.Validates existence, values of base fields - version, event.
+      #2.Validates size of events list
+      #3.Fetches and Validates Plans from Cassandra
+  Then #Pre-process events picking the latest timestamp based event for each user
+      pre_process_subscription_bulk_events return a dictionary user_event_map <user_id, event(which has compared)> 
+  Final call put_in_cassandra
+-----------------------------------
+
+  
