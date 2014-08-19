@@ -62,9 +62,32 @@ Metadata Service
 
 What's matadata?.(not a part of object itself but it's an object for examples include the path of an object or the last modification time.)
 
+This service mainly do the task such as query metadata by ES, delete device by ES,etc.
+
+--#longisland/__init__.py
+ journal_request(): keep journal 
+
+--#longisland/jobs.py
+ store. also will call julep.jobs.update_metadata_by_checking_thumbnail
 
 
 
 
+--------------------------------
 
+Storage Service
 
+How does a document upload? What's the flow?
+(For example, we call files_put method, check.. , verify..., then connect to swift, upload through swift_put_object method, then write cassandra-->means insert metadata to cassandra by ES, add record into swift_directory_cf)
+
+Thumbnails also put into swift by swift_put_object method
+
+---------------------------------
+
+Subscription Service
+
+2APIS
+  --GET /subsctiptiton/<user_id>/status-- polaris-directory/src/directory/user_info.py  : Details for user's subscription plan.
+  --POST /polaris/services/subscription/callback-- directory/subsctiption_callback.py  : Allows the Microsite to update the Subscription Service with a subscription plan change for a user. Not callable by the clients.
+
+  callback : See the Class Schema
