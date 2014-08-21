@@ -1,0 +1,17 @@
+class Foo(object):
+    def __init__(self, list):
+        self.list = list
+        self.list_index = -1
+    def __iter__(self):
+        return self
+    def next(self):
+    	try:
+    		self.list_index = self.list_index + 1
+        	return self.list[self.list_index]
+    	except:
+    		raise StopIteration
+
+if __name__ == "__main__":
+    foo = Foo([1,2,3])
+    for f in foo:
+        print(f)
