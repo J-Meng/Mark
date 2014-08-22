@@ -1,0 +1,5 @@
+#查看进程占用端口
+netstat -nltp|grep processID
+
+#查看进程
+ps -elf | grep processName

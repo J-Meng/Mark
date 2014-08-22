@@ -100,4 +100,19 @@ Subscription Service
   Final call put_in_cassandra
 -----------------------------------
 
+Crawler Service
+FSS
+
+  --engine.py crawl --This method will crawl a given provider in order to grab all user files
+    metadata and insert them into the Eslastic Search backend. The backend will
+    than be used by LongIsland to retrieve all user metadata, as do search.
+  the provider for example: facebook -- Through method get_items to call Facebook get metadata for a _folder_ and return the response from facebook
+    then it use own iterator to get metadata.
+
+------------------------------------
   
+Action Service
+
+
+
+

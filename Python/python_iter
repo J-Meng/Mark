@@ -1,4 +1,14 @@
 class Foo(object):
+	"""
+	Example for iter and next usage
+	How to use Iterator in python
+
+	result:
+	>1
+	>2
+	>3
+
+	"""
     def __init__(self, list):
         self.list = list
         self.list_index = -1
