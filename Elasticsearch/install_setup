@@ -1,0 +1,36 @@
+Elasticsearch requires Java 7. Specifically as of this writing, it is recommended that you use the Oracle JDK version 1.7.0_60. Java installation varies from platform to platform so we won’t go into those details here. Suffice to say, before you install Elasticsearch, please check your Java version first by running (and then install/upgrade accordingly if needed):
+
+>java -version
+>echo $JAVA_HOME
+
+Once we have Java set up, we can then download and run Elasticsearch. The binaries are available from www.elasticsearch.org/download along with all the releases that have been made in the past. For each release, you have a choice among a zip, tar, DEB, or RPM package. For simplicity, let’s use the tar package.
+
+Let’s download the Elasticsearch 1.3.0 tar as follows (Windows users should download the zip package):
+
+>curl -L -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.0.tar.gz
+
+Then extract it as follows (Windows users should unzip the zip package):
+
+>tar -xvf elasticsearch-1.3.0.tar.gz
+
+It will then create a bunch of files and folders in your current directory. We then go into the bin directory as follows:
+
+>cd elasticsearch-1.3.0/bin
+
+And now we are ready to start our node and single cluster (Windows users should run the elasticsearch.bat file):
+
+./elasticsearch
+
+As mentioned previously, we can override either the cluster or node name. This can be done from the command line when starting Elasticsearch as follows:
+
+>./elasticsearch --cluster.name my_cluster_name --node.name my_node_name
+
+#############
+ Here I met one problem that mention me one error: You must set ES_CLASSPATH. 
+
+>explore ES_CLASSPATH=elasticsearch-1.3.0/lib/*.jar
+#############
+
+then you have already start the elasticsearch
+check the port 
+maybe http://localhost:9200/_cat/health?v to check helth
