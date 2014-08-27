@@ -28,7 +28,7 @@ As mentioned previously, we can override either the cluster or node name. This c
 #############
  Here I met one problem that mention me one error: You must set ES_CLASSPATH. 
 
->explore ES_CLASSPATH=elasticsearch-1.3.0/lib/*.jar
+>export ES_CLASSPATH=elasticsearch-1.3.0/lib/*.jar
 #############
 
 then you have already start the elasticsearch

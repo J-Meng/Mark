@@ -1,0 +1,17 @@
+#list all indexes
+
+>curl 'localhost:9200/_cat/indices?v'
+
+#and the response:
+health index pri rep docs.count docs.deleted store.size pri.store.size
+
+#no index so no record
+
+#create an index:
+
+>curl -XPUT 'localhost:9200/customer?pretty'
+>curl "localhost:9200/_cat/indices?v"
+
+The pattern can be summarized as follows:
+
+curl -<REST Verb> <Node>:<Port>/<Index>/<Type>/<ID>

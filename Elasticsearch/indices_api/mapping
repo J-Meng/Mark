@@ -1,0 +1,45 @@
+The put mapping API can be applied to more than one index with a single call, or even on _all the indices.
+
+$ curl -XPUT 'http://localhost:9200/kimchy,elasticsearch/tweet/_mapping' -d '
+{
+    "tweet" : {
+        "properties" : {
+            "message" : {"type" : "string", "store" : true }
+        }
+    }
+}
+'
+All options:
+
+PUT /{index}/_mapping/{type}
+where
+
+{index}
+
+blank | * | _all | glob pattern | name1, name2, …
+
+{type}
+
+Name of the type to add. Must be the name of the type defined in the body.
+
+Instead of _mapping you can also use the plural _mappings. The uri PUT /{index}/{type}/_mapping is still supported for backwards compatibility
+
+
+
+So in mapping - fields - _ttl
+
+We can use like this:
+	1.#open the ttl for mapping which will expired doc#
+    curl -XPUT localhost:9201/customer/external/_mapping - d '
+    {
+    	"external": {
+    		"_ttl": {"enabled": true} 
+    	}
+    }'
+    2.put the doc with ttl
+    curl -XPUT localhost:9201/customer/external/5?ttl=20000 -d '
+	{
+		"name": "test ttl",
+		"message": "it will expired in 20 seconds"
+	}'
+	3.get the doc and check the doc before 20s and after 20s
