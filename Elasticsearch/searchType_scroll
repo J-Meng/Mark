@@ -1,0 +1,45 @@
+ elasticsearch 內 有對不同的 search 情境 提供多種的 search type  ，像是只想取得 document 個數的 search_type=count ，還有提供高效輸出結果的 scan 。
+
+curl -XGET 'localhost:9200/_search?search_type=scan&scroll=10m&size=50' -d '
+{
+    "query" : {
+        "match_all" : {}
+    }
+}
+'
+scan 與 scroll
+scan這個 search type 與 scroll api 就是為了從 elasticsearch 高效的獲取比較大量的 document。 使用 scan就可以避免調 deep paging 的問題。
+
+deep paging 
+deep paging 是個非常容易定義出來的問題。當search engine要 return search result的時候， kernel 必須準備對應的 in -memory 的資料結構回應。簡單來說，如果我們想要回應 
+10000個分頁，每個分頁有20的result，那們就必須要有一個 20*10000=200 000 個 單位的結構。
+使用 scan 剛好可以解決 deep paging遇到的問題。在 elasticsearch中 ，如果我們有 5個 primary shards，我們想返回 top 10 的內容，每個shard都會返回 top 10 到 requesting node上做彙整，最後再挑出 top 10。
+取個例子來看，要是我們要取的分頁是1000 每頁有十筆，當我們要往後取時，就要在每個shard取出相對應的top n 並且skip 掉非常大量的數目。
+
+有此看來就知道，在分散式的搜尋引擎中 sorting 這種資訊的成本非常高。這也就是為什麼，一般的web都不會回超過 一定量的分頁數。
+
+分頁估計值
+在顯示大量資料會出現幾個分頁，甚至是有幾筆。最常使用的技巧，就是估計值。
+你可以估計出，這個 term 在一定量的 資料 出現比例是多少。在大資料的前提下，你就可以推估出，這個 term在全部的資料有出現大約多少筆。
+
+
+使用 scan 要回一個 scroll_id
+
+curl -XGET 'localhost:9200/_search?search_type=scan&scroll=10m&size=50' -d '
+{
+    "query" : {
+        "match_all" : {}
+    },
+    "size":1000}
+'
+10m 表示 scroll 開啟的時間是 10分鐘 ,30s 是 30秒
+在這裡還可以指定每次返回的size是多大。
+執行後會返回一個 scroll id 在使用 scroll  api 去把資料取回來。
+
+scroll 是一個  base64 encode 的 字串。
+這裡的 size 會被執行到每個 shard上去，所以實際返回的數目應該會是
+
+size * number_of_primary_shards
+
+使用 scroll api 可以把 document 取回，這裡取回的 document 省去了sorting的開銷。
+curl -XGET 'localhost:9200/_search/scroll?scroll=10m' -d 'c2NhbjsxOjBLMzdpWEtqU2IyZHlmVURPeFJOZnc7MzowSzM3aVhLalNiMmR5ZlVET3hSTmZ3OzU6MEszN2lYS2pTYjJkeWZVRE94Uk5mdzsyOjBLMzdpWEtqU2IyZHlmVURPeFJOZnc7NDowSzM3aVhLalNiMmR5ZlVET3hSTmZ3Ow=='
