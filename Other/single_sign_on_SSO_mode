@@ -1,0 +1,29 @@
+#http://msdn.microsoft.com/en-US/library/windows/apps/xaml/hh465279
+
+In our Directory login method
+--For us , we use snapfish to login
+
+1.Check if request.args has redirect_uri which is used to callback.If it has, save it in session.
+
+2.Check all args.Save them in session. 
+
+3.Then create a url which will request to snapfish authorization. Then user will login at snapfish server.Then callback to /login/callback.
+
+
+At /login/callback
+1.Check webauthstatus if need logout.
+
+2.If has error, do error flow.
+
+3.Check session still good.
+
+4.Get the token data from puma with param 'authcode' which get from callback data.
+
+5.Validate token 
+  check redis for hashed access token
+    -- if already cached the token ,just return user.
+    -- else validate the token with snapfish.
+            if success from snapfish response, cached hashed token&user also set ttl to expire the cache.
+            return user.
+
+6. If redirect_uri redirect to it.
