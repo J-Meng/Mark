@@ -9,8 +9,8 @@ http://legacy.python.org/dev/peps/pep-3333/
 
 We use the middle-ware to verify the Authorization
 
-'''
 #At wsgi.py 
+'''
 import AuthMiddleware
 
 class Application(Flask):
@@ -21,6 +21,7 @@ class Application(Flask):
 '''
 #AuthMiddleware
 
+'''
 class Middleware:
     def __init__(self, app, swp_validator):
         self.app = app
