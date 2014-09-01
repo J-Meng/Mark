@@ -10,7 +10,7 @@ http://legacy.python.org/dev/peps/pep-3333/
 We use the middle-ware to verify the Authorization
 
 #At wsgi.py 
-'''
+
 import AuthMiddleware
 
 class Application(Flask):
@@ -18,10 +18,10 @@ class Application(Flask):
         ...
         self.wsgi_app = Middleware(self.wsgi_app, self.validate_with_swp)
         ...
-'''
+
 #AuthMiddleware
 
-'''
+
 class Middleware:
     def __init__(self, app, swp_validator):
         self.app = app
@@ -38,6 +38,6 @@ class Middleware:
         authorization = environ.pop("HTTP_authorization")
 
         return self.app(environ, _start_res)
-'''
+
 
 check the environ Variables
